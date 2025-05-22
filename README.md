@@ -6,15 +6,14 @@ A TensorFlow pipeline for classifying German traffic signs (GTSRB) using a pre�
 
 ## 🚀 Features
 
-* **Dataset**: GTSRB (German Traffic Sign Recognition Benchmark) from Kaggle
-* **Preprocessing**: ROI cropping, resizing to 224×224, pixel normalization
-* **Augmentation**: Rotation, zoom, width/height shifts during training
-* **Model**: Transfer learning with VGG16 (ImageNet weights), two-stage training:
+* **Dataset**: GTSRB with bounding-box ROI cropping
+* **Model**: Pre-trained VGG16 (ImageNet) backbone + custom head
+* **Two-Stage Training**:
 
-  1. Freeze convolutional base, train head only
-  2. Unfreeze last block, fine‑tune full model
-* **Callbacks**: Early stopping on validation loss (patience=3)
-* **Outputs**: Trained model saved as `gtsrb_finetuned_model.keras`
+  1. **Stage A**: Train head layers (freeze VGG16 base)
+  2. **Stage B**: Fine-tune last conv block (unfreeze `block5_*`)
+* **Augmentation**: Random rotations, shifts, zoom
+* **Performance**: Val accuracy \~93.4% after fine-tuning
 
 ---
 
